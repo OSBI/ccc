@@ -206,7 +206,7 @@ def
             };
         }
 
-        this.pvPie = new pvc.visual.PieSlice(this, this.pvPanel, {
+        this.pvPie = new pvc.visual.RadarPoint(this, this.pvPanel, {
                 extensionId: extensionIds,
                 center: center,
                 activeOffsetRadius: layoutInfo.activeOffsetRadius,
@@ -341,8 +341,8 @@ def
 
                 this.pvLinkPanel = this.pvPanel.add(pv.Panel)
                     .data(rootScene.childNodes)
-                    .localProperty('pieSlice')
-                    .pieSlice(function() { return me.pvPie.scene[this.index]; });
+                    .localProperty('radarPoint')
+                    .radarPoint(function() { return me.pvPie.scene[this.index]; });
 
                 var f = false, t = true;
                 this.pvLinkLine = new pvc.visual.Line(
@@ -361,11 +361,11 @@ def
                     .lockMark('data', function(scene) {
                         // Calculate the dynamic dot at the
                         // slice's middle angle and outer radius...
-                        var pieSlice = this.parent.pieSlice(),
-                            midAngle = pieSlice.startAngle + pieSlice.angle / 2,
-                            outerRadius = pieSlice.outerRadius - linkLayout.insetRadius,
-                            x = pieSlice.left + outerRadius * Math.cos(midAngle),
-                            y = pieSlice.top  + outerRadius * Math.sin(midAngle),
+                        var radarPoint = this.parent.radarPoint(),
+                            midAngle = radarPoint.startAngle + radarPoint.angle / 2,
+                            outerRadius = radarPoint.outerRadius - linkLayout.insetRadius,
+                            x = radarPoint.left + outerRadius * Math.cos(midAngle),
+                            y = radarPoint.top  + outerRadius * Math.sin(midAngle),
                             firstDotScene = scene.childNodes[0];
 
                         if(!firstDotScene || !firstDotScene._isFirstDynamicScene) {
